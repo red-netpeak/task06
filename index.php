@@ -8,14 +8,21 @@ class NewDatabaseConnection {
   public function __construct($host, $db, $user, $pass, $table = 'test') {
     $charset = 'utf8';
     $this->table = $table;
-    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+    try {
+      $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 
-    $opt = array(
-      PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-    );
+      $opt = array(
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+      );
 
-    $this->pdo = new PDO($dsn, $user, $pass, $opt);
+      $this->pdo = new PDO($dsn, $user, $pass, $opt);
+    }
+    catch(Exception $e) {
+      echo "<br>Error! ".$e->getMessage()."<br>";
+      die("Write correct data.");
+    }
+
   }
 
   public function main ($table = 'test') {
