@@ -54,6 +54,7 @@ class NewDatabaseConnection {
     echo "<br>Test selection<br>".PHP_EOL;
     $this->useTable('customer');
     $this->select("name, surname");
+    $this->pdo = NULL;
   }
 
   public function useTable($table) {
